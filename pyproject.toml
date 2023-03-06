@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pact_zk_generator"
+version = "0.1"
+license = {text = "MIT"}
+dependencies = [
+    "more_itertools"
+]
+
+[project.scripts]
+pact_zk_gen = "pact_zk_gen:main"

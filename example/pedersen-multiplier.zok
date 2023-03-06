@@ -1,0 +1,12 @@
+import "hashes/pedersen/512bit" as pedersen_hash;
+import "utils/pack/u32/nonStrictUnpack256" as unpacker;
+import "utils/pack/u32/pack256" as packer;
+
+
+def main(private field my_secret, public field multiplier) -> field {
+  u32[8] input_unpacked = unpacker(my_secret * multiplier);
+  u32[8] zeros = [0; 8];
+  u32[16] pedersen_input = [...input_unpacked ,...zeros];
+  u32[8] hash = pedersen_hash(pedersen_input);
+  return packer(hash);
+}
