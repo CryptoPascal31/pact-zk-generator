@@ -50,7 +50,7 @@ This tool can handle 2 proofs formats:
 
 ## Quickstart / Example:
 An example is provided in the `example` sub-directory with detailed instructions.
-  [Example](example/README.md)
+  [Example](example/)
 
 ## Commands
 
