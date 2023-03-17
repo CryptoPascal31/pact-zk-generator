@@ -16,7 +16,7 @@ pact_zk_gen gen-module --module-name pedersen-mult-verifier --proof-type string
 # Compute an example
 # 123456789 is the secret
 # 26  is the multiplier
-zokrates compute-witness -a 12346789 26
+zokrates compute-witness -a 123456789 26
 echo "Output result:" `grep out_0 witness`
 
 # Gnerate a proof
