@@ -51,7 +51,7 @@ class ZoKrates_Project:
                 # This means no output
                 return None
 
-            raise ValueError("Only field type is supported for input")
+            raise ValueError("Only field type is supported for output")
 
         for inp in abi_data['inputs']:
             if inp['public']:
