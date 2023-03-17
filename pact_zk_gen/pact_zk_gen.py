@@ -4,6 +4,7 @@ from .zokrates import ZoKrates_Project
 import pickle
 from pathlib import Path
 from itertools import product
+from ._version import __version__
 
 class PersistantState:
     FILENAME = ".pact_zk_state"
@@ -76,6 +77,7 @@ def gen_proof(args):
 
 def _main():
     parser = argparse.ArgumentParser(prog='pact_zk_gen')
+    parser.add_argument('--version', action='version', version='%(prog)s {version}'.format(version=__version__))
     subparsers = parser.add_subparsers(required=False, help='Action', dest='action')
 
     parser_gen_contract = subparsers.add_parser("gen-module", help="Generate verifier module")
