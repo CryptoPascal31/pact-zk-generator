@@ -2,6 +2,7 @@ import json
 from pprint import pprint
 from collections import namedtuple
 from pathlib import Path
+from functools import partial
 
 CircuitArgument = namedtuple("CircuitArgument", "name type length")
 
@@ -12,6 +13,8 @@ class ZoKrates_Project:
     FILES = {'ABI':"abi.json",
              'PROOF': "proof.json",
              'VERIFICATION_KEY':"verification.key"}
+
+    ALLOWED_ABI_TYPES = {'field', 'u8', 'u16', 'u32', 'u64'}
 
 
     def __init__(self,dir=None):
@@ -36,22 +39,19 @@ class ZoKrates_Project:
         private_inputs = []
         outputs = []
 
-        def __to_inp_argument(x):
-            if x['type'] == "field":
-                return CircuitArgument(x['name'], "field", 1 )
+
+        def __to_argument(x, is_output=False):
+            name = x['name'] if not is_output else "out"
+            if x['type'] in self.ALLOWED_ABI_TYPES:
+                return CircuitArgument(name, x['type'], 1 )
             if x['type'] == "array":
-                if x["components"]["type"] == "field":
-                    return CircuitArgument(x['name'], "field", x['components']['size'])
-            raise ValueError("Only field and field[] types are supported")
+                subtype = x["components"]["type"]
+                if subtype in self.ALLOWED_ABI_TYPES:
+                    return CircuitArgument(name, subtype , x['components']['size'])
+            raise ValueError("Only field/integers and [field/integers] types are supported")
 
-        def __to_outp_argument(x):
-            if x['type'] == "field":
-                return CircuitArgument("out", "field", 1 )
-            if x['type'] == "tuple" and not x['components']['elements']:
-                # This means no output
-                return None
-
-            raise ValueError("Only field type is supported for output")
+        __to_inp_argument = partial(__to_argument, is_output=False)
+        __to_outp_argument = partial(__to_argument, is_output=True)
 
         for inp in abi_data['inputs']:
             if inp['public']:

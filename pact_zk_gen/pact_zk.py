@@ -78,7 +78,7 @@ def gen_proof(proof, as_string):
     return '"'+ serialize_proof(proof) +'"' if as_string else json.dumps(proof)
 
 
-TYPES_CAST = {"field":"integer"}
+TYPES_CAST = {"field":"integer", "u8":"integer", "u16":"integer", "u32":"integer", "u64":"integer" }
 
 def gen_pact_module(module_name, verif_key, public_arguments, is_proof_string):
     def __format_argument(x):
