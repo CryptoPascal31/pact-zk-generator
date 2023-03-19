@@ -11,7 +11,7 @@ MODULE_TEMPLATE = """
 
   (defcap GOVERNANCE ()
     ;The default behaviour is to create non-upgradable module but this can be changed here
-    false)
+    (enforce false "Non upgradable module"))
 
   (defconst V-KEY:object{groth16-verify-key} $vkey)
 
