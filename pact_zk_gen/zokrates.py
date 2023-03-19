@@ -48,6 +48,10 @@ class ZoKrates_Project:
                 subtype = x["components"]["type"]
                 if subtype in self.ALLOWED_ABI_TYPES:
                     return CircuitArgument(name, subtype , x['components']['size'])
+            if is_output and x['type'] == "tuple" and not x['components']['elements']:
+                # This means no output
+                return None
+
             raise ValueError("Only field/integers and [field/integers] types are supported")
 
         __to_inp_argument = partial(__to_argument, is_output=False)
