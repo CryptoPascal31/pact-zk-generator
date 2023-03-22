@@ -1,10 +1,11 @@
 import argparse
-from . import pact_zk
-from .zokrates import ZoKrates_Project
 import pickle
 from pathlib import Path
 from itertools import product
+
 from ._version import __version__
+from . import pact_zk
+from .zokrates import ZoKrates_Project
 
 class PersistantState:
     FILENAME = ".pact_zk_state"

@@ -1,5 +1,4 @@
 import json
-from pprint import pprint
 from collections import namedtuple
 from pathlib import Path
 from functools import partial
