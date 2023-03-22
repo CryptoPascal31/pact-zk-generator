@@ -95,6 +95,7 @@ def _main():
     parser_gen_proof.set_defaults(func=gen_proof)
 
     parser_help = subparsers.add_parser("help", help="Show help")
+    parser_help.set_defaults(func=lambda x:parser.print_help())
     parser.set_defaults(func=lambda x:parser.print_help())
 
     args = parser.parse_args()
