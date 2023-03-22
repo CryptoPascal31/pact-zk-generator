@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pact_zk_generator"
-version = "0.1"
+version = "0.2"
 license = {text = "MIT"}
 dependencies = [
     "more_itertools"
