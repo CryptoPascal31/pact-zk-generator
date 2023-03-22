@@ -86,8 +86,7 @@ def gen_pact_module(module_name, verif_key, public_arguments, is_proof_string):
     def __format_argument(x):
         if x.length == 1:
             return "{:s}:{:s}".format(x.name, TYPES_CAST[x.type])
-        else:
-            return "{:s}:[{:s}]".format(x.name, TYPES_CAST[x.type])
+        return "{:s}:[{:s}]".format(x.name, TYPES_CAST[x.type])
 
     func_arguments = [__format_argument(x) for x in public_arguments]
 

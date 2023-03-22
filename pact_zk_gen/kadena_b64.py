@@ -3,8 +3,7 @@ import base64
 def _ensure_bytes(x):
     if isinstance(x, str):
         return x.encode('ascii')
-    else:
-        return x
+    return x
 
 def b64_encode(data):
     data = _ensure_bytes(data)

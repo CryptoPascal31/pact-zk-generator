@@ -16,8 +16,8 @@ class ZoKrates_Project:
     ALLOWED_ABI_TYPES = {'field', 'u8', 'u16', 'u32', 'u64'}
 
 
-    def __init__(self,dir=None):
-        self._dir = Path(dir) if dir else Path.cwd()
+    def __init__(self,project_dir=None):
+        self._dir = Path(project_dir) if project_dir else Path.cwd()
 
     def _load_json(self, file):
         with open(self._dir.joinpath(self.FILES[file])) as fd:

@@ -29,20 +29,19 @@ class PersistantState:
 p_state = PersistantState.load()
 
 def locate_util_lib_dir(req_dir):
-    dir = Path(req_dir).resolve()
+    req_dir = Path(req_dir).resolve()
     for d1, d2 in product( ('.', 'pact-util-lib', '.pact_util_lib', '../pact-util-lib/', '../../pact-util-lib/'),
                            ('pact/contracts', 'contracts', 'pact')):
-        _dir = dir.joinpath(d1).joinpath(d2)
+        _dir = req_dir.joinpath(d1).joinpath(d2)
         if _dir.is_dir() and _dir.joinpath("util-zk.pact").is_file():
             print("pact-util-lib found:{!s}".format(_dir))
             return _dir
-    else:
-        raise ValueError("Unable to locate pact-util-lib")
+    raise ValueError("Unable to locate pact-util-lib")
 
 def gen_contract(args):
     print("Generate Pact module")
     zok = ZoKrates_Project()
-    pub,priv, out = zok.get_abi()
+    pub, priv, out = zok.get_abi()
     pact_zk.gen_pact_module(args.module_name, zok.get_key(), pub + out, args.proof_type =="string")
     p_state.last_module = args.module_name
     p_state.last_proof_type = args.proof_type
@@ -55,7 +54,7 @@ def gen_test_repl(args):
     if not p_state.last_module:
         raise ValueError("No module has been created")
 
-    pub,priv, out = zok.get_abi()
+    pub, priv, out = zok.get_abi()
     inputs = zok.get_inputs()
     proof  = zok.get_proof()
 
